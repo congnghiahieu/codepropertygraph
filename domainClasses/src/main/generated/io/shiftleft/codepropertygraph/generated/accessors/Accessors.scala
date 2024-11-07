@@ -457,8 +457,21 @@ object Accessors {
       case newNode: nodes.NewLifetime => newNode.typeDeclFullName
     }
   }
-  final class AccessLifetimeargumentBase(val node: nodes.LifetimeArgumentBase) extends AnyVal {}
+  final class AccessLifetimeargumentBase(val node: nodes.LifetimeArgumentBase) extends AnyVal {
+    def code: String = node match {
+      case stored: nodes.StoredNode           => new AccessPropertyCode(stored).code
+      case newNode: nodes.NewLifetimeArgument => newNode.code
+    }
+    def name: String = node match {
+      case stored: nodes.StoredNode           => new AccessPropertyName(stored).name
+      case newNode: nodes.NewLifetimeArgument => newNode.name
+    }
+  }
   final class AccessLifetimeparameterBase(val node: nodes.LifetimeParameterBase) extends AnyVal {
+    def code: String = node match {
+      case stored: nodes.StoredNode            => new AccessPropertyCode(stored).code
+      case newNode: nodes.NewLifetimeParameter => newNode.code
+    }
     def name: String = node match {
       case stored: nodes.StoredNode            => new AccessPropertyName(stored).name
       case newNode: nodes.NewLifetimeParameter => newNode.name

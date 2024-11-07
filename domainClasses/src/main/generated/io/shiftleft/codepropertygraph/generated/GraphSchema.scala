@@ -568,6 +568,12 @@ object GraphSchema extends flatgraph.Schema {
     nodePropertyDescriptors(3709) = FormalQtyType.QtyOne
     nodePropertyDescriptors(4836) = FormalQtyType.StringType // LIFETIME.TYPE_DECL_FULL_NAME
     nodePropertyDescriptors(4837) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(984) = FormalQtyType.StringType // LIFETIME_ARGUMENT.CODE
+    nodePropertyDescriptors(985) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(3710) = FormalQtyType.StringType // LIFETIME_ARGUMENT.NAME
+    nodePropertyDescriptors(3711) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(986) = FormalQtyType.StringType // LIFETIME_PARAMETER.CODE
+    nodePropertyDescriptors(987) = FormalQtyType.QtyOne
     nodePropertyDescriptors(3712) = FormalQtyType.StringType // LIFETIME_PARAMETER.NAME
     nodePropertyDescriptors(3713) = FormalQtyType.QtyOne
     nodePropertyDescriptors(142) = FormalQtyType.IntType // LITERAL.ARGUMENT_INDEX
@@ -1065,6 +1071,9 @@ object GraphSchema extends flatgraph.Schema {
     _newNodeInserters(2110) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_fullName
     _newNodeInserters(3708) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_name
     _newNodeInserters(4836) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_typeDeclFullName
+    _newNodeInserters(984) = nodes.NewLifetimeArgument.InsertionHelpers.NewNodeInserter_LifetimeArgument_code
+    _newNodeInserters(3710) = nodes.NewLifetimeArgument.InsertionHelpers.NewNodeInserter_LifetimeArgument_name
+    _newNodeInserters(986) = nodes.NewLifetimeParameter.InsertionHelpers.NewNodeInserter_LifetimeParameter_code
     _newNodeInserters(3712) = nodes.NewLifetimeParameter.InsertionHelpers.NewNodeInserter_LifetimeParameter_name
     _newNodeInserters(142) = nodes.NewLiteral.InsertionHelpers.NewNodeInserter_Literal_argumentIndex
     _newNodeInserters(236) = nodes.NewLiteral.InsertionHelpers.NewNodeInserter_Literal_argumentName
@@ -1348,8 +1357,8 @@ object GraphSchema extends flatgraph.Schema {
         Set("ARGUMENT_INDEX", "CODE", "COLUMN_NUMBER", "LINE_NUMBER", "NAME", "ORDER", "PARSER_TYPE_NAME")
       case "KEY_VALUE_PAIR"     => Set("KEY", "VALUE")
       case "LIFETIME"           => Set("FULL_NAME", "NAME", "TYPE_DECL_FULL_NAME")
-      case "LIFETIME_ARGUMENT"  => Set()
-      case "LIFETIME_PARAMETER" => Set("NAME")
+      case "LIFETIME_ARGUMENT"  => Set("CODE", "NAME")
+      case "LIFETIME_PARAMETER" => Set("CODE", "NAME")
       case "LITERAL" =>
         Set(
           "ARGUMENT_INDEX",
