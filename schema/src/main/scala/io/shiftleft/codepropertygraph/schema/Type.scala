@@ -170,7 +170,7 @@ object Type extends SchemaBase {
         comment = """Actual lifetime parameter (use for Rust only).""".stripMargin
       )
       .protoId(4173)
-      .addProperties(name)
+      .addProperties(name, code)
 
     val lifetimeArgument: NodeType = builder
       .addNodeType(
@@ -178,6 +178,7 @@ object Type extends SchemaBase {
         comment = """Actual lifetime argument (use for Rust only).""".stripMargin
       )
       .protoId(4174)
+      .addProperties(name, code)
 
     val lifetime: NodeType = builder
       .addNodeType(
