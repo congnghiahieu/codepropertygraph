@@ -305,6 +305,23 @@ that this jump target is created from, e.g., "Label".""")
   def keyValuePair: Iterator[nodes.KeyValuePair] =
     wrappedCpg.graph._nodes(20).asInstanceOf[Iterator[nodes.KeyValuePair]]
 
+  /** This node represents a lifetime instance (use for Rust only). */
+  @flatgraph.help.Doc(info = """This node represents a lifetime instance (use for Rust only).""")
+  def lifetime: Iterator[nodes.Lifetime] = wrappedCpg.graph._nodes(21).asInstanceOf[Iterator[nodes.Lifetime]]
+
+  /** Shorthand for lifetime.name */
+  def lifetime(name: String): Iterator[nodes.Lifetime] = lifetime.name(name)
+
+  /** Actual lifetime argument (use for Rust only). */
+  @flatgraph.help.Doc(info = """Actual lifetime argument (use for Rust only).""")
+  def lifetimeArgument: Iterator[nodes.LifetimeArgument] =
+    wrappedCpg.graph._nodes(22).asInstanceOf[Iterator[nodes.LifetimeArgument]]
+
+  /** Actual lifetime parameter (use for Rust only). */
+  @flatgraph.help.Doc(info = """Actual lifetime parameter (use for Rust only).""")
+  def lifetimeParameter: Iterator[nodes.LifetimeParameter] =
+    wrappedCpg.graph._nodes(23).asInstanceOf[Iterator[nodes.LifetimeParameter]]
+
   /** This node represents a literal such as an integer or string constant. Literals are symbols included in the code in
     * verbatim form and which are immutable. The `TYPE_FULL_NAME` field stores the literal's fully-qualified type name,
     * e.g., `java.lang.Integer`.
@@ -313,7 +330,7 @@ that this jump target is created from, e.g., "Label".""")
 are symbols included in the code in verbatim form and which are immutable.
 The `TYPE_FULL_NAME` field stores the literal's fully-qualified type name,
 e.g., `java.lang.Integer`.""")
-  def literal: Iterator[nodes.Literal] = wrappedCpg.graph._nodes(21).asInstanceOf[Iterator[nodes.Literal]]
+  def literal: Iterator[nodes.Literal] = wrappedCpg.graph._nodes(24).asInstanceOf[Iterator[nodes.Literal]]
 
   /** Shorthand for literal.code */
   def literal(code: String): Iterator[nodes.Literal] = literal.code(code)
@@ -326,14 +343,14 @@ e.g., `java.lang.Integer`.""")
 in the `TYPE_FULL_NAME` field and its name in the `NAME` field. The `CODE` field
 contains the entire local variable declaration without initialization, e.g., for
 `int x = 10;`, it contains `int x`.""")
-  def local: Iterator[nodes.Local] = wrappedCpg.graph._nodes(22).asInstanceOf[Iterator[nodes.Local]]
+  def local: Iterator[nodes.Local] = wrappedCpg.graph._nodes(25).asInstanceOf[Iterator[nodes.Local]]
 
   /** Shorthand for local.name */
   def local(name: String): Iterator[nodes.Local] = local.name(name)
 
   /** A location node summarizes a source code location. */
   @flatgraph.help.Doc(info = """A location node summarizes a source code location.""")
-  def location: Iterator[nodes.Location] = wrappedCpg.graph._nodes(23).asInstanceOf[Iterator[nodes.Location]]
+  def location: Iterator[nodes.Location] = wrappedCpg.graph._nodes(26).asInstanceOf[Iterator[nodes.Location]]
 
   /** This node represents a type member of a class, struct or union, e.g., for the type declaration `class Foo{ int i ;
     * }`, it represents the declaration of the variable `i`.
@@ -341,7 +358,7 @@ contains the entire local variable declaration without initialization, e.g., for
   @flatgraph.help.Doc(info = """This node represents a type member of a class, struct or union, e.g., for the
  type declaration `class Foo{ int i ; }`, it represents the declaration of the
  variable `i`.""")
-  def member: Iterator[nodes.Member] = wrappedCpg.graph._nodes(24).asInstanceOf[Iterator[nodes.Member]]
+  def member: Iterator[nodes.Member] = wrappedCpg.graph._nodes(27).asInstanceOf[Iterator[nodes.Member]]
 
   /** Shorthand for member.name */
   def member(name: String): Iterator[nodes.Member] = member.name(name)
@@ -357,7 +374,7 @@ over the source files this CPG was generated from. The `VERSION` MUST be
 set to the version of the specification ("1.1"). The language field indicates
 which language frontend was used to generate the CPG and the list property
 `OVERLAYS` specifies which overlays have been applied to the CPG.""")
-  def metaData: Iterator[nodes.MetaData] = wrappedCpg.graph._nodes(25).asInstanceOf[Iterator[nodes.MetaData]]
+  def metaData: Iterator[nodes.MetaData] = wrappedCpg.graph._nodes(28).asInstanceOf[Iterator[nodes.MetaData]]
 
   /** Programming languages offer many closely-related concepts for describing blocks of code that can be executed with
     * input parameters and return output parameters, possibly causing side effects. In the CPG specification, we refer
@@ -407,7 +424,7 @@ Finally, the fully qualified name of the program constructs that the method
 is immediately contained in is stored in the `AST_PARENT_FULL_NAME` field
 and its type is indicated in the `AST_PARENT_TYPE` field to be one of
 `METHOD`, `TYPE_DECL` or `NAMESPACE_BLOCK`.""")
-  def method: Iterator[nodes.Method] = wrappedCpg.graph._nodes(26).asInstanceOf[Iterator[nodes.Method]]
+  def method: Iterator[nodes.Method] = wrappedCpg.graph._nodes(29).asInstanceOf[Iterator[nodes.Method]]
 
   /** Shorthand for method.name */
   def method(name: String): Iterator[nodes.Method] = method.name(name)
@@ -418,7 +435,7 @@ and its type is indicated in the `AST_PARENT_TYPE` field to be one of
   @flatgraph.help.Doc(info = """This node represents a formal input parameter. The field `NAME` contains its
 name, while the field `TYPE_FULL_NAME` contains the fully qualified type name.""")
   def methodParameterIn: Iterator[nodes.MethodParameterIn] =
-    wrappedCpg.graph._nodes(27).asInstanceOf[Iterator[nodes.MethodParameterIn]]
+    wrappedCpg.graph._nodes(30).asInstanceOf[Iterator[nodes.MethodParameterIn]]
 
   /** Shorthand for methodParameterIn.name */
   def methodParameterIn(name: String): Iterator[nodes.MethodParameterIn] = methodParameterIn.name(name)
@@ -430,7 +447,7 @@ name, while the field `TYPE_FULL_NAME` contains the fully qualified type name.""
 for input parameters MUST NOT be created by the frontend as they are automatically
 created upon first loading the CPG.""")
   def methodParameterOut: Iterator[nodes.MethodParameterOut] =
-    wrappedCpg.graph._nodes(28).asInstanceOf[Iterator[nodes.MethodParameterOut]]
+    wrappedCpg.graph._nodes(31).asInstanceOf[Iterator[nodes.MethodParameterOut]]
 
   /** This node represents a reference to a method/function/procedure as it appears when a method is passed as an
     * argument in a call. The `METHOD_FULL_NAME` field holds the fully-qualified name of the referenced method and the
@@ -440,7 +457,7 @@ created upon first loading the CPG.""")
 appears when a method is passed as an argument in a call. The `METHOD_FULL_NAME`
 field holds the fully-qualified name of the referenced method and the
 `TYPE_FULL_NAME` holds its fully-qualified type name.""")
-  def methodRef: Iterator[nodes.MethodRef] = wrappedCpg.graph._nodes(29).asInstanceOf[Iterator[nodes.MethodRef]]
+  def methodRef: Iterator[nodes.MethodRef] = wrappedCpg.graph._nodes(32).asInstanceOf[Iterator[nodes.MethodRef]]
 
   /** This node represents an (unnamed) formal method return parameter. It carries its fully qualified type name in
     * `TYPE_FULL_NAME`. The `CODE` field MAY be set freely, e.g., to the constant `RET`, however, subsequent layer
@@ -451,7 +468,7 @@ fully qualified type name in `TYPE_FULL_NAME`. The `CODE` field MAY be set freel
 e.g., to the constant `RET`, however, subsequent layer creators MUST NOT depend
 on this value.""")
   def methodReturn: Iterator[nodes.MethodReturn] =
-    wrappedCpg.graph._nodes(30).asInstanceOf[Iterator[nodes.MethodReturn]]
+    wrappedCpg.graph._nodes(33).asInstanceOf[Iterator[nodes.MethodReturn]]
 
   /** This field represents a (language-dependent) modifier such as `static`, `private` or `public`. Unlike most other
     * AST nodes, it is NOT an expression, that is, it cannot be evaluated and cannot be passed as an argument in
@@ -460,7 +477,7 @@ on this value.""")
   @flatgraph.help.Doc(info = """This field represents a (language-dependent) modifier such as `static`, `private`
 or `public`. Unlike most other AST nodes, it is NOT an expression, that is, it
 cannot be evaluated and cannot be passed as an argument in function calls.""")
-  def modifier: Iterator[nodes.Modifier] = wrappedCpg.graph._nodes(31).asInstanceOf[Iterator[nodes.Modifier]]
+  def modifier: Iterator[nodes.Modifier] = wrappedCpg.graph._nodes(34).asInstanceOf[Iterator[nodes.Modifier]]
 
   /** This node represents a namespace. Similar to FILE nodes, NAMESPACE nodes serve as indices that allow all
     * definitions inside a namespace to be obtained by following outgoing edges from a NAMESPACE node.
@@ -475,7 +492,7 @@ obtained by following outgoing edges from a NAMESPACE node.
 NAMESPACE nodes MUST NOT be created by language frontends. Instead,
 they are generated from NAMESPACE_BLOCK nodes automatically upon
 first loading of the CPG.""")
-  def namespace: Iterator[nodes.Namespace] = wrappedCpg.graph._nodes(32).asInstanceOf[Iterator[nodes.Namespace]]
+  def namespace: Iterator[nodes.Namespace] = wrappedCpg.graph._nodes(35).asInstanceOf[Iterator[nodes.Namespace]]
 
   /** Shorthand for namespace.name */
   def namespace(name: String): Iterator[nodes.Namespace] = namespace.name(name)
@@ -507,7 +524,7 @@ The name should be given in dot-separated form where a dot indicates
 that the right hand side is a sub namespace of the left hand side, e.g.,
 `foo.bar` denotes the namespace `bar` contained in the namespace `foo`.""")
   def namespaceBlock: Iterator[nodes.NamespaceBlock] =
-    wrappedCpg.graph._nodes(33).asInstanceOf[Iterator[nodes.NamespaceBlock]]
+    wrappedCpg.graph._nodes(36).asInstanceOf[Iterator[nodes.NamespaceBlock]]
 
   /** Shorthand for namespaceBlock.name */
   def namespaceBlock(name: String): Iterator[nodes.NamespaceBlock] = namespaceBlock.name(name)
@@ -518,31 +535,31 @@ that the right hand side is a sub namespace of the left hand side, e.g.,
   @flatgraph.help.Doc(info = """This node represents a return instruction, e.g., `return x`. Note that it does
 NOT represent a formal return parameter as formal return parameters are
 represented via `METHOD_RETURN` nodes.""")
-  def ret: Iterator[nodes.Return] = wrappedCpg.graph._nodes(34).asInstanceOf[Iterator[nodes.Return]]
+  def ret: Iterator[nodes.Return] = wrappedCpg.graph._nodes(37).asInstanceOf[Iterator[nodes.Return]]
 
   /** Shorthand for ret.code */
   def ret(code: String): Iterator[nodes.Return] = ret.code(code)
 
   /** This node represents a tag. */
   @flatgraph.help.Doc(info = """This node represents a tag.""")
-  def tag: Iterator[nodes.Tag] = wrappedCpg.graph._nodes(35).asInstanceOf[Iterator[nodes.Tag]]
+  def tag: Iterator[nodes.Tag] = wrappedCpg.graph._nodes(38).asInstanceOf[Iterator[nodes.Tag]]
 
   /** Shorthand for tag.name */
   def tag(name: String): Iterator[nodes.Tag] = tag.name(name)
 
   /** This node contains an arbitrary node and an associated tag node. */
   @flatgraph.help.Doc(info = """This node contains an arbitrary node and an associated tag node.""")
-  def tagNodePair: Iterator[nodes.TagNodePair] = wrappedCpg.graph._nodes(36).asInstanceOf[Iterator[nodes.TagNodePair]]
+  def tagNodePair: Iterator[nodes.TagNodePair] = wrappedCpg.graph._nodes(39).asInstanceOf[Iterator[nodes.TagNodePair]]
 
   /** This node represents a DOM node used in template languages, e.g., JSX/TSX */
   @flatgraph.help.Doc(info = """This node represents a DOM node used in template languages, e.g., JSX/TSX""")
-  def templateDom: Iterator[nodes.TemplateDom] = wrappedCpg.graph._nodes(37).asInstanceOf[Iterator[nodes.TemplateDom]]
+  def templateDom: Iterator[nodes.TemplateDom] = wrappedCpg.graph._nodes(40).asInstanceOf[Iterator[nodes.TemplateDom]]
 
   /** This node represents a type instance, that is, a concrete instantiation of a type declaration.
     */
   @flatgraph.help.Doc(info = """This node represents a type instance, that is, a concrete instantiation
 of a type declaration.""")
-  def typ: Iterator[nodes.Type] = wrappedCpg.graph._nodes(38).asInstanceOf[Iterator[nodes.Type]]
+  def typ: Iterator[nodes.Type] = wrappedCpg.graph._nodes(41).asInstanceOf[Iterator[nodes.Type]]
 
   /** Shorthand for typ.name */
   def typ(name: String): Iterator[nodes.Type] = typ.name(name)
@@ -557,7 +574,7 @@ at method call sites. As it true for arguments, the method is not expected
 to  interpret the type argument. It MUST however store its code in the
 `CODE` field.""")
   def typeArgument: Iterator[nodes.TypeArgument] =
-    wrappedCpg.graph._nodes(39).asInstanceOf[Iterator[nodes.TypeArgument]]
+    wrappedCpg.graph._nodes(42).asInstanceOf[Iterator[nodes.TypeArgument]]
 
   /** This node represents a type declaration as for example given by a class-, struct-, or union declaration. In
     * contrast to a `TYPE` node, this node does not represent a concrete instantiation of a type, e.g., for the
@@ -612,7 +629,7 @@ Finally, the fully qualified name of the program constructs that the type declar
 is immediately contained in is stored in the `AST_PARENT_FULL_NAME` field
 and its type is indicated in the `AST_PARENT_TYPE` field to be one of
 `METHOD`, `TYPE_DECL` or `NAMESPACE_BLOCK`.""")
-  def typeDecl: Iterator[nodes.TypeDecl] = wrappedCpg.graph._nodes(40).asInstanceOf[Iterator[nodes.TypeDecl]]
+  def typeDecl: Iterator[nodes.TypeDecl] = wrappedCpg.graph._nodes(43).asInstanceOf[Iterator[nodes.TypeDecl]]
 
   /** Shorthand for typeDecl.name */
   def typeDecl(name: String): Iterator[nodes.TypeDecl] = typeDecl.name(name)
@@ -628,11 +645,11 @@ languages that support type parameters are Java (via Generics) and C++
 (via templates). Apart from the standard fields of AST nodes, the type
 parameter carries only a `NAME` field that holds the parameters name.""")
   def typeParameter: Iterator[nodes.TypeParameter] =
-    wrappedCpg.graph._nodes(41).asInstanceOf[Iterator[nodes.TypeParameter]]
+    wrappedCpg.graph._nodes(44).asInstanceOf[Iterator[nodes.TypeParameter]]
 
   /** Reference to a type/class */
   @flatgraph.help.Doc(info = """Reference to a type/class""")
-  def typeRef: Iterator[nodes.TypeRef] = wrappedCpg.graph._nodes(42).asInstanceOf[Iterator[nodes.TypeRef]]
+  def typeRef: Iterator[nodes.TypeRef] = wrappedCpg.graph._nodes(45).asInstanceOf[Iterator[nodes.TypeRef]]
 
   /** Any AST node that the frontend would like to include in the AST but for which no suitable AST node is specified in
     * the CPG specification may be included using a node of type `UNKNOWN`.
@@ -640,7 +657,7 @@ parameter carries only a `NAME` field that holds the parameters name.""")
   @flatgraph.help.Doc(info = """Any AST node that the frontend would like to include in the AST but for
 which no suitable AST node is specified in the CPG specification may be
 included using a node of type `UNKNOWN`.""")
-  def unknown: Iterator[nodes.Unknown] = wrappedCpg.graph._nodes(43).asInstanceOf[Iterator[nodes.Unknown]]
+  def unknown: Iterator[nodes.Unknown] = wrappedCpg.graph._nodes(46).asInstanceOf[Iterator[nodes.Unknown]]
 
   /** This is the base type for all nodes of the abstract syntax tree (AST). An AST node has a `CODE` and an `ORDER`
     * field. The `CODE` field contains the code (verbatim) represented by the AST node. The `ORDER` field contains the

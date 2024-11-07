@@ -301,6 +301,15 @@ package object traversals {
     implicit def traversalKeyvaluepairBase[NodeType <: nodes.KeyValuePairBase](
       traversal: IterableOnce[NodeType]
     ): TraversalKeyvaluepairBase[NodeType] = new TraversalKeyvaluepairBase(traversal.iterator)
+    implicit def traversalLifetimeBase[NodeType <: nodes.LifetimeBase](
+      traversal: IterableOnce[NodeType]
+    ): TraversalLifetimeBase[NodeType] = new TraversalLifetimeBase(traversal.iterator)
+    implicit def traversalLifetimeargumentBase[NodeType <: nodes.LifetimeArgumentBase](
+      traversal: IterableOnce[NodeType]
+    ): TraversalLifetimeargumentBase[NodeType] = new TraversalLifetimeargumentBase(traversal.iterator)
+    implicit def traversalLifetimeparameterBase[NodeType <: nodes.LifetimeParameterBase](
+      traversal: IterableOnce[NodeType]
+    ): TraversalLifetimeparameterBase[NodeType] = new TraversalLifetimeparameterBase(traversal.iterator)
     implicit def traversalLiteralBase[NodeType <: nodes.LiteralBase](
       traversal: IterableOnce[NodeType]
     ): TraversalLiteralBase[NodeType] = new TraversalLiteralBase(traversal.iterator)

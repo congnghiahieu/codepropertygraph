@@ -135,6 +135,15 @@ public static final String JUMP_TARGET = "JUMP_TARGET";
 /** This node represents a key value pair, where both the key and the value are strings. */
 public static final String KEY_VALUE_PAIR = "KEY_VALUE_PAIR";
 
+/** This node represents a lifetime instance (use for Rust only). */
+public static final String LIFETIME = "LIFETIME";
+
+/** Actual lifetime argument (use for Rust only). */
+public static final String LIFETIME_ARGUMENT = "LIFETIME_ARGUMENT";
+
+/** Actual lifetime parameter (use for Rust only). */
+public static final String LIFETIME_PARAMETER = "LIFETIME_PARAMETER";
+
 /** This node represents a literal such as an integer or string constant. Literals
 are symbols included in the code in verbatim form and which are immutable.
 The `TYPE_FULL_NAME` field stores the literal's fully-qualified type name,
@@ -335,6 +344,9 @@ add(IMPORT);
 add(JUMP_LABEL);
 add(JUMP_TARGET);
 add(KEY_VALUE_PAIR);
+add(LIFETIME);
+add(LIFETIME_ARGUMENT);
+add(LIFETIME_PARAMETER);
 add(LITERAL);
 add(LOCAL);
 add(LOCATION);

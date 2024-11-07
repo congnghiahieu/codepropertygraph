@@ -75,7 +75,7 @@ object TypeParameter {
 }
 
 class TypeParameter(graph_4762: flatgraph.Graph, seq_4762: Int)
-    extends StoredNode(graph_4762, 41.toShort, seq_4762)
+    extends StoredNode(graph_4762, 44.toShort, seq_4762)
     with TypeParameterBase
     with AstNode
     with StaticType[TypeParameterEMT] {
@@ -1479,7 +1479,7 @@ object NewTypeParameter {
   }
 }
 
-class NewTypeParameter extends NewNode(41.toShort) with TypeParameterBase with AstNodeNew {
+class NewTypeParameter extends NewNode(44.toShort) with TypeParameterBase with AstNodeNew {
   override type StoredNodeType = TypeParameter
   override def label: String = "TYPE_PARAMETER"
 

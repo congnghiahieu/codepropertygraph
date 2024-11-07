@@ -159,7 +159,7 @@ object Unknown {
 }
 
 class Unknown(graph_4762: flatgraph.Graph, seq_4762: Int)
-    extends StoredNode(graph_4762, 43.toShort, seq_4762)
+    extends StoredNode(graph_4762, 46.toShort, seq_4762)
     with UnknownBase
     with Expression
     with StaticType[UnknownEMT] {
@@ -1733,7 +1733,7 @@ object NewUnknown {
   }
 }
 
-class NewUnknown extends NewNode(43.toShort) with UnknownBase with ExpressionNew {
+class NewUnknown extends NewNode(46.toShort) with UnknownBase with ExpressionNew {
   override type StoredNodeType = Unknown
   override def label: String = "UNKNOWN"
 

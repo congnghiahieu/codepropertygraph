@@ -443,6 +443,27 @@ object Accessors {
       case newNode: nodes.NewKeyValuePair => newNode.value
     }
   }
+  final class AccessLifetimeBase(val node: nodes.LifetimeBase) extends AnyVal {
+    def fullName: String = node match {
+      case stored: nodes.StoredNode   => new AccessPropertyFullName(stored).fullName
+      case newNode: nodes.NewLifetime => newNode.fullName
+    }
+    def name: String = node match {
+      case stored: nodes.StoredNode   => new AccessPropertyName(stored).name
+      case newNode: nodes.NewLifetime => newNode.name
+    }
+    def typeDeclFullName: String = node match {
+      case stored: nodes.StoredNode   => new AccessPropertyTypeDeclFullName(stored).typeDeclFullName
+      case newNode: nodes.NewLifetime => newNode.typeDeclFullName
+    }
+  }
+  final class AccessLifetimeargumentBase(val node: nodes.LifetimeArgumentBase) extends AnyVal {}
+  final class AccessLifetimeparameterBase(val node: nodes.LifetimeParameterBase) extends AnyVal {
+    def name: String = node match {
+      case stored: nodes.StoredNode            => new AccessPropertyName(stored).name
+      case newNode: nodes.NewLifetimeParameter => newNode.name
+    }
+  }
   final class AccessLiteralBase(val node: nodes.LiteralBase) extends AnyVal {
     def dynamicTypeHintFullName: IndexedSeq[String] = node match {
       case stored: nodes.StoredNode  => new AccessPropertyDynamicTypeHintFullName(stored).dynamicTypeHintFullName
@@ -1070,6 +1091,11 @@ trait ConcreteBaseConversions extends AbstractBaseConversions0 {
   implicit def accessJumptargetbase(node: nodes.JumpTargetBase): AccessJumptargetBase = new AccessJumptargetBase(node)
   implicit def accessKeyvaluepairbase(node: nodes.KeyValuePairBase): AccessKeyvaluepairBase =
     new AccessKeyvaluepairBase(node)
+  implicit def accessLifetimebase(node: nodes.LifetimeBase): AccessLifetimeBase = new AccessLifetimeBase(node)
+  implicit def accessLifetimeargumentbase(node: nodes.LifetimeArgumentBase): AccessLifetimeargumentBase =
+    new AccessLifetimeargumentBase(node)
+  implicit def accessLifetimeparameterbase(node: nodes.LifetimeParameterBase): AccessLifetimeparameterBase =
+    new AccessLifetimeparameterBase(node)
   implicit def accessLiteralbase(node: nodes.LiteralBase): AccessLiteralBase    = new AccessLiteralBase(node)
   implicit def accessLocalbase(node: nodes.LocalBase): AccessLocalBase          = new AccessLocalBase(node)
   implicit def accessLocationbase(node: nodes.LocationBase): AccessLocationBase = new AccessLocationBase(node)

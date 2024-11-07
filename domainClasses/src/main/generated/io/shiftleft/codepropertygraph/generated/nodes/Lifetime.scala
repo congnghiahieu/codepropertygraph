@@ -6,78 +6,85 @@ import scala.collection.mutable
 
 /** Node base type for compiletime-only checks to improve type safety.
  * EMT stands for: "erased marker trait", i.e. it is erased at runtime */
-trait DependencyEMT extends AnyRef with HasDependencyGroupIdEMT with HasNameEMT with HasVersionEMT
+trait LifetimeEMT extends AnyRef with HasFullNameEMT with HasNameEMT with HasTypeDeclFullNameEMT
 
-trait DependencyBase extends AbstractNode with StaticType[DependencyEMT] {
+trait LifetimeBase extends AbstractNode with StaticType[LifetimeEMT] {
   
   override def propertiesMap: java.util.Map[String, Any] = {
  import io.shiftleft.codepropertygraph.generated.accessors.languagebootstrap.*
  val res = new java.util.HashMap[String, Any]()
-this.dependencyGroupId.foreach{p => res.put("DEPENDENCY_GROUP_ID", p )}
+if (("<empty>": String) != this.fullName) res.put("FULL_NAME", this.fullName )
 if (("<empty>": String) != this.name) res.put("NAME", this.name )
-if (("<empty>": String) != this.version) res.put("VERSION", this.version )
+if (("<empty>": String) != this.typeDeclFullName) res.put("TYPE_DECL_FULL_NAME", this.typeDeclFullName )
  res
 }
 }
 
-object Dependency {
-  val Label = "DEPENDENCY"
+object Lifetime {
+  val Label = "LIFETIME"
   object PropertyNames {
-    /** The group ID for a dependency */
-val DependencyGroupId = "DEPENDENCY_GROUP_ID" 
+    /** This is the fully-qualified name of an entity, e.g., the fully-qualified
+name of a method or type. The details of what constitutes a fully-qualified
+name are language specific. This field SHOULD be human readable. */
+val FullName = "FULL_NAME" 
 /** Name of represented object, e.g., method name (e.g. "run") */
 val Name = "NAME" 
-/** A version, given as a string. Used, for example, in the META_DATA node to
-indicate which version of the CPG spec this CPG conforms to */
-val Version = "VERSION" 
+/** The static type decl of a TYPE. This property is matched against the FULL_NAME
+of TYPE_DECL nodes. It is required to have exactly one TYPE_DECL for each
+different TYPE_DECL_FULL_NAME */
+val TypeDeclFullName = "TYPE_DECL_FULL_NAME" 
   }
   object Properties {
-    /** The group ID for a dependency */
-val DependencyGroupId = flatgraph.OptionalPropertyKey[String](kind = 16, name = "DEPENDENCY_GROUP_ID")
+    /** This is the fully-qualified name of an entity, e.g., the fully-qualified
+name of a method or type. The details of what constitutes a fully-qualified
+name are language specific. This field SHOULD be human readable. */
+val FullName = flatgraph.SinglePropertyKey[String](kind = 22, name = "FULL_NAME", default = "<empty>")
 /** Name of represented object, e.g., method name (e.g. "run") */
 val Name = flatgraph.SinglePropertyKey[String](kind = 39, name = "NAME", default = "<empty>")
-/** A version, given as a string. Used, for example, in the META_DATA node to
-indicate which version of the CPG spec this CPG conforms to */
-val Version = flatgraph.SinglePropertyKey[String](kind = 54, name = "VERSION", default = "<empty>")
+/** The static type decl of a TYPE. This property is matched against the FULL_NAME
+of TYPE_DECL nodes. It is required to have exactly one TYPE_DECL for each
+different TYPE_DECL_FULL_NAME */
+val TypeDeclFullName = flatgraph.SinglePropertyKey[String](kind = 51, name = "TYPE_DECL_FULL_NAME", default = "<empty>")
   }
   object PropertyDefaults {
-    val Name = "<empty>"
-val Version = "<empty>"
+    val FullName = "<empty>"
+val Name = "<empty>"
+val TypeDeclFullName = "<empty>"
   }
 }
 
-class Dependency(graph_4762: flatgraph.Graph, seq_4762: Int) extends StoredNode(graph_4762, 12.toShort , seq_4762) with DependencyBase with StaticType[DependencyEMT] {
+class Lifetime(graph_4762: flatgraph.Graph, seq_4762: Int) extends StoredNode(graph_4762, 21.toShort , seq_4762) with LifetimeBase with StaticType[LifetimeEMT] {
   
 
   override def productElementName(n: Int): String =
     n match {
-      case 0 => "dependencyGroupId"
+      case 0 => "fullName"
 case 1 => "name"
-case 2 => "version"
+case 2 => "typeDeclFullName"
       case _ => ""
     }
 
   override def productElement(n: Int): Any =
     n match {
-      case 0 => this.dependencyGroupId
+      case 0 => this.fullName
 case 1 => this.name
-case 2 => this.version
+case 2 => this.typeDeclFullName
       case _ => null
     }
 
-  override def productPrefix = "Dependency"
+  override def productPrefix = "Lifetime"
   override def productArity = 3
 
-  override def canEqual(that: Any): Boolean = that != null && that.isInstanceOf[Dependency]
+  override def canEqual(that: Any): Boolean = that != null && that.isInstanceOf[Lifetime]
 }
 
-object NewDependency {
-  def apply(): NewDependency = new NewDependency
+object NewLifetime {
+  def apply(): NewLifetime = new NewLifetime
   private val outNeighbors: Map[String, Set[String]] = Map()
-  private val inNeighbors: Map[String, Set[String]] = Map("IMPORTS" -> Set("IMPORT"))
+  private val inNeighbors: Map[String, Set[String]] = Map()
 
   object InsertionHelpers {
-      object NewNodeInserter_Dependency_dependencyGroupId extends flatgraph.NewNodePropertyInsertionHelper {
+      object NewNodeInserter_Lifetime_fullName extends flatgraph.NewNodePropertyInsertionHelper {
   override def insertNewNodeProperties(newNodes: mutable.ArrayBuffer[flatgraph.DNode], dst: AnyRef, offsets: Array[Int]): Unit = {
      if(newNodes.isEmpty) return
      val dstCast = dst.asInstanceOf[Array[String]]
@@ -87,13 +94,9 @@ object NewDependency {
      while(idx < newNodes.length){
         val nn = newNodes(idx)
         nn match {
-          case generated: NewDependency =>
-            generated.dependencyGroupId match {
-              case Some(item) =>
-                dstCast(offset) = item
-                offset += 1
-              case _ =>
-            }
+          case generated: NewLifetime =>
+            dstCast(offset) = generated.fullName
+            offset += 1
           case _ =>
         }
         assert(seq + idx == nn.storedRef.get.seq(), "internal consistency check")
@@ -102,7 +105,7 @@ object NewDependency {
      }
   }
 }
-object NewNodeInserter_Dependency_name extends flatgraph.NewNodePropertyInsertionHelper {
+object NewNodeInserter_Lifetime_name extends flatgraph.NewNodePropertyInsertionHelper {
   override def insertNewNodeProperties(newNodes: mutable.ArrayBuffer[flatgraph.DNode], dst: AnyRef, offsets: Array[Int]): Unit = {
      if(newNodes.isEmpty) return
      val dstCast = dst.asInstanceOf[Array[String]]
@@ -112,7 +115,7 @@ object NewNodeInserter_Dependency_name extends flatgraph.NewNodePropertyInsertio
      while(idx < newNodes.length){
         val nn = newNodes(idx)
         nn match {
-          case generated: NewDependency =>
+          case generated: NewLifetime =>
             dstCast(offset) = generated.name
             offset += 1
           case _ =>
@@ -123,7 +126,7 @@ object NewNodeInserter_Dependency_name extends flatgraph.NewNodePropertyInsertio
      }
   }
 }
-object NewNodeInserter_Dependency_version extends flatgraph.NewNodePropertyInsertionHelper {
+object NewNodeInserter_Lifetime_typeDeclFullName extends flatgraph.NewNodePropertyInsertionHelper {
   override def insertNewNodeProperties(newNodes: mutable.ArrayBuffer[flatgraph.DNode], dst: AnyRef, offsets: Array[Int]): Unit = {
      if(newNodes.isEmpty) return
      val dstCast = dst.asInstanceOf[Array[String]]
@@ -133,8 +136,8 @@ object NewNodeInserter_Dependency_version extends flatgraph.NewNodePropertyInser
      while(idx < newNodes.length){
         val nn = newNodes(idx)
         nn match {
-          case generated: NewDependency =>
-            dstCast(offset) = generated.version
+          case generated: NewLifetime =>
+            dstCast(offset) = generated.typeDeclFullName
             offset += 1
           case _ =>
         }
@@ -147,55 +150,54 @@ object NewNodeInserter_Dependency_version extends flatgraph.NewNodePropertyInser
   }
 }
 
-class NewDependency extends NewNode(12.toShort) with DependencyBase {
-  override type StoredNodeType = Dependency
-  override def label: String = "DEPENDENCY"
+class NewLifetime extends NewNode(21.toShort) with LifetimeBase {
+  override type StoredNodeType = Lifetime
+  override def label: String = "LIFETIME"
 
   override def isValidOutNeighbor(edgeLabel: String, n: NewNode): Boolean = {
-    NewDependency.outNeighbors.getOrElse(edgeLabel, Set.empty).contains(n.label)
+    NewLifetime.outNeighbors.getOrElse(edgeLabel, Set.empty).contains(n.label)
   }
   override def isValidInNeighbor(edgeLabel: String, n: NewNode): Boolean = {
-    NewDependency.inNeighbors.getOrElse(edgeLabel, Set.empty).contains(n.label)
+    NewLifetime.inNeighbors.getOrElse(edgeLabel, Set.empty).contains(n.label)
   }
 
-  var dependencyGroupId: Option[String] = None
+  var fullName: String = "<empty>": String
 var name: String = "<empty>": String
-var version: String = "<empty>": String
-  def dependencyGroupId(value: Option[String]): this.type = {this.dependencyGroupId = value; this }
-def dependencyGroupId(value: String): this.type = {this.dependencyGroupId = Option(value); this }
+var typeDeclFullName: String = "<empty>": String
+  def fullName(value: String): this.type = {this.fullName = value; this }
 def name(value: String): this.type = {this.name = value; this }
-def version(value: String): this.type = {this.version = value; this }
+def typeDeclFullName(value: String): this.type = {this.typeDeclFullName = value; this }
   override def countAndVisitProperties(interface: flatgraph.BatchedUpdateInterface): Unit = {
-interface.countProperty(this, 16, dependencyGroupId.size)
+interface.countProperty(this, 22, 1)
 interface.countProperty(this, 39, 1)
-interface.countProperty(this, 54, 1)
+interface.countProperty(this, 51, 1)
 }
 
   override def copy: this.type = {
-    val newInstance = new NewDependency
-    newInstance.dependencyGroupId = this.dependencyGroupId
+    val newInstance = new NewLifetime
+    newInstance.fullName = this.fullName
 newInstance.name = this.name
-newInstance.version = this.version
+newInstance.typeDeclFullName = this.typeDeclFullName
     newInstance.asInstanceOf[this.type]
   }
 
   override def productElementName(n: Int): String =
     n match {
-      case 0 => "dependencyGroupId"
+      case 0 => "fullName"
 case 1 => "name"
-case 2 => "version"
+case 2 => "typeDeclFullName"
       case _ => ""
     }
 
   override def productElement(n: Int): Any =
     n match {
-      case 0 => this.dependencyGroupId
+      case 0 => this.fullName
 case 1 => this.name
-case 2 => this.version
+case 2 => this.typeDeclFullName
       case _ => null
     }
 
-  override def productPrefix = "NewDependency"
+  override def productPrefix = "NewLifetime"
   override def productArity = 3
-  override def canEqual(that: Any): Boolean = that != null && that.isInstanceOf[NewDependency]
+  override def canEqual(that: Any): Boolean = that != null && that.isInstanceOf[NewLifetime]
 }

@@ -137,7 +137,7 @@ object TypeRef {
 }
 
 class TypeRef(graph_4762: flatgraph.Graph, seq_4762: Int)
-    extends StoredNode(graph_4762, 42.toShort, seq_4762)
+    extends StoredNode(graph_4762, 45.toShort, seq_4762)
     with TypeRefBase
     with Expression
     with StaticType[TypeRefEMT] {
@@ -1657,7 +1657,7 @@ object NewTypeRef {
   }
 }
 
-class NewTypeRef extends NewNode(42.toShort) with TypeRefBase with ExpressionNew {
+class NewTypeRef extends NewNode(45.toShort) with TypeRefBase with ExpressionNew {
   override type StoredNodeType = TypeRef
   override def label: String = "TYPE_REF"
 
