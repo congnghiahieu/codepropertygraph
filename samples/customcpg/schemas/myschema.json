@@ -1,9 +1,11 @@
 {
-    "nodeTypes" : [
-        {"id" : 35, "name" : "MY_CUSTOM_NODE_TYPE",
-         "keys": ["CODE"],
-         "comment" : "This is my custom node type",
-         "outEdges": []
-        }
-    ]
+  "nodeTypes": [
+    {
+      "id": 35,
+      "name": "MY_CUSTOM_NODE_TYPE",
+      "keys": ["CODE"],
+      "comment": "This is my custom node type",
+      "outEdges": []
+    }
+  ]
 }

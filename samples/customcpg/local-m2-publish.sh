@@ -9,7 +9,7 @@ CODEPROPERTYGRAPH_ROOT=../../
 set -e
 set -o pipefail
 
-BASE_DIR=`pwd`
+BASE_DIR=$(pwd)
 CSHARP_FLAG=$1
 
 # checkout the latest released (tagged) version of codepropertygraph (public)
@@ -20,7 +20,7 @@ cd build/codepropertygraph
 
 # add our schema extensions
 CPG_SCHEMA_DIR=codepropertygraph/src/main/resources/schemas
-for file in `ls ../../schemas`; do
+for file in $(ls ../../schemas); do
   if [ -f ${CPG_SCHEMA_DIR}/$file ]; then
     echo "file $file already exists! exiting."
     exit 1
@@ -30,9 +30,9 @@ done
 
 # change name to codepropertygraph-custom
 # can't use `sed -i` because of macOS :(
-sed 's/name := "\(.*\)"/name := "\1-custom"/' codepropertygraph/build.sbt > codepropertygraph/build.sbt.tmp
+sed 's/name := "\(.*\)"/name := "\1-custom"/' codepropertygraph/build.sbt >codepropertygraph/build.sbt.tmp
 mv codepropertygraph/build.sbt.tmp codepropertygraph/build.sbt
-sed 's/name := "\(.*\)"/name := "\1-custom"/' proto-bindings/build.sbt > proto-bindings/build.sbt.tmp
+sed 's/name := "\(.*\)"/name := "\1-custom"/' proto-bindings/build.sbt >proto-bindings/build.sbt.tmp
 mv proto-bindings/build.sbt.tmp proto-bindings/build.sbt
 
 # publish to m2 local repo

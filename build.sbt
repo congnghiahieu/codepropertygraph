@@ -5,8 +5,8 @@ val flatgraphVersion = "0.0.97"
 
 inThisBuild(
   List(
-    organization       := "io.shiftleft",
-    scalaVersion       := "3.4.3",
+    organization := "io.shiftleft",
+    scalaVersion := "3.4.3",
     resolvers ++= Seq(Resolver.mavenLocal, "Sonatype OSS" at "https://oss.sonatype.org/content/repositories/public"),
     packageDoc / publishArtifact := true,
     packageSrc / publishArtifact := true,
@@ -41,7 +41,7 @@ ThisBuild / Test / javaOptions += s"-Duser.dir=${(ThisBuild / baseDirectory).val
 
 ThisBuild / libraryDependencies ++= Seq(
   "org.apache.logging.log4j" % "log4j-slf4j2-impl" % "2.19.0" % Optional,
-  "org.apache.logging.log4j" % "log4j-core"        % "2.19.0" % Optional,
+  "org.apache.logging.log4j" % "log4j-core"        % "2.19.0" % Optional
   // `Optional` means "not transitive", but still included in "stage/lib"
 )
 
@@ -55,7 +55,8 @@ lazy val codepropertygraph = Projects.codepropertygraph
 lazy val schema2json       = Projects.schema2json
 
 ThisBuild / scalacOptions ++= Seq(
-  "-release", "8",
+  "-release",
+  "8",
   "-deprecation",
   "-feature",
   // "-explain",
@@ -66,7 +67,8 @@ ThisBuild / scalacOptions ++= Seq(
 
 ThisBuild / javacOptions ++= Seq(
   "-g", // debug symbols
-  "--release", "8"
+  "--release",
+  "8"
 )
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
