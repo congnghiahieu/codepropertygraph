@@ -15,6 +15,9 @@ public static final String JAVASCRIPT = "JAVASCRIPT";
 public static final String GOLANG = "GOLANG";
 
 
+public static final String RUSTLANG = "RUSTLANG";
+
+
 public static final String CSHARP = "CSHARP";
 
 
@@ -63,6 +66,7 @@ public static Set<String> ALL = new HashSet<String>() {{
 add(JAVA);
 add(JAVASCRIPT);
 add(GOLANG);
+add(RUSTLANG);
 add(CSHARP);
 add(C);
 add(PYTHON);

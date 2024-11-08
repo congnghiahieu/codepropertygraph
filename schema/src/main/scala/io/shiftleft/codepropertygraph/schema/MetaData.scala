@@ -80,6 +80,7 @@ object MetaData extends SchemaBase {
       Constant(name = "JAVA", value = "JAVA", valueType = ValueType.String, comment = "").protoId(1),
       Constant(name = "JAVASCRIPT", value = "JAVASCRIPT", valueType = ValueType.String, comment = "").protoId(2),
       Constant(name = "GOLANG", value = "GOLANG", valueType = ValueType.String, comment = "").protoId(3),
+      Constant(name = "RUSTLANG", value = "RUSTLANG", valueType = ValueType.String, comment = "").protoId(4176),
       Constant(name = "CSHARP", value = "CSHARP", valueType = ValueType.String, comment = "").protoId(4),
       Constant(name = "C", value = "C", valueType = ValueType.String, comment = "").protoId(5),
       Constant(name = "PYTHON", value = "PYTHON", valueType = ValueType.String, comment = "").protoId(6),
