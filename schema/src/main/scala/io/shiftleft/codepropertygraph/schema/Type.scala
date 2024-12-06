@@ -164,32 +164,6 @@ object Type extends SchemaBase {
       .starterName("typ")
       .primaryKey(name)
 
-    val lifetimeParameter: NodeType = builder
-      .addNodeType(
-        name = "LIFETIME_PARAMETER",
-        comment = """Actual lifetime parameter (use for Rust only).""".stripMargin
-      )
-      .protoId(4173)
-      .addProperties(name, code)
-
-    val lifetimeArgument: NodeType = builder
-      .addNodeType(
-        name = "LIFETIME_ARGUMENT",
-        comment = """Actual lifetime argument (use for Rust only).""".stripMargin
-      )
-      .protoId(4174)
-      .addProperties(name, code)
-
-    val lifetime: NodeType = builder
-      .addNodeType(
-        name = "LIFETIME",
-        comment = """This node represents a lifetime instance (use for Rust only).""".stripMargin
-      )
-      .protoId(4175)
-      .addProperties(name, fullName, typeDeclFullName)
-      .starterName("lifetime")
-      .primaryKey(name)
-
     // edges
 
     val bindsTo = builder
