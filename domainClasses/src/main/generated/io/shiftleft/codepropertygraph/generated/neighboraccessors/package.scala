@@ -153,6 +153,32 @@ package object neighboraccessors {
     ): AccessNeighborsForJumpTargetTraversal =
       new AccessNeighborsForJumpTargetTraversal(traversal.iterator)
 
+    implicit def accessNeighborsForLifetime(node: nodes.Lifetime): AccessNeighborsForLifetime =
+      new AccessNeighborsForLifetime(node)
+
+    implicit def accessNeighborsForLifetimeTraversal(
+      traversal: IterableOnce[nodes.Lifetime]
+    ): AccessNeighborsForLifetimeTraversal =
+      new AccessNeighborsForLifetimeTraversal(traversal.iterator)
+
+    implicit def accessNeighborsForLifetimeArgument(node: nodes.LifetimeArgument): AccessNeighborsForLifetimeArgument =
+      new AccessNeighborsForLifetimeArgument(node)
+
+    implicit def accessNeighborsForLifetimeArgumentTraversal(
+      traversal: IterableOnce[nodes.LifetimeArgument]
+    ): AccessNeighborsForLifetimeArgumentTraversal =
+      new AccessNeighborsForLifetimeArgumentTraversal(traversal.iterator)
+
+    implicit def accessNeighborsForLifetimeParameter(
+      node: nodes.LifetimeParameter
+    ): AccessNeighborsForLifetimeParameter =
+      new AccessNeighborsForLifetimeParameter(node)
+
+    implicit def accessNeighborsForLifetimeParameterTraversal(
+      traversal: IterableOnce[nodes.LifetimeParameter]
+    ): AccessNeighborsForLifetimeParameterTraversal =
+      new AccessNeighborsForLifetimeParameterTraversal(traversal.iterator)
+
     implicit def accessNeighborsForLiteral(node: nodes.Literal): AccessNeighborsForLiteral =
       new AccessNeighborsForLiteral(node)
 

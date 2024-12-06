@@ -95,6 +95,22 @@ final class AccessNeighborsForMethod(val node: nodes.Method) extends AnyVal {
     */
   def _jumpTargetViaContainsOut: Iterator[nodes.JumpTarget] = containsOut.collectAll[nodes.JumpTarget]
 
+  /** Traverse to LIFETIME via AST IN edge.
+    */
+  def _lifetimeViaAstIn: Iterator[nodes.Lifetime] = astIn.collectAll[nodes.Lifetime]
+
+  /** Traverse to LIFETIME via OUT_LIVE IN edge.
+    */
+  def _lifetimeViaOutLiveIn: Iterator[nodes.Lifetime] = outLiveIn.collectAll[nodes.Lifetime]
+
+  /** Traverse to LIFETIME_PARAMETER via AST IN edge.
+    */
+  def _lifetimeParameterViaAstIn: Iterator[nodes.LifetimeParameter] = astIn.collectAll[nodes.LifetimeParameter]
+
+  /** Traverse to LIFETIME_PARAMETER via OUT_LIVE IN edge.
+    */
+  def _lifetimeParameterViaOutLiveIn: Iterator[nodes.LifetimeParameter] = outLiveIn.collectAll[nodes.LifetimeParameter]
+
   /** Traverse to LITERAL via DOMINATE OUT edge.
     */
   def _literalViaDominateOut: Iterator[nodes.Literal] = dominateOut.collectAll[nodes.Literal]
@@ -316,6 +332,8 @@ final class AccessNeighborsForMethod(val node: nodes.Method) extends AnyVal {
 
   def dominateOut: Iterator[nodes.CfgNode] = node._dominateOut.cast[nodes.CfgNode]
 
+  def outLiveIn: Iterator[nodes.AstNode] = node._outLiveIn.cast[nodes.AstNode]
+
   def postDominateIn: Iterator[nodes.CfgNode] = node._postDominateIn.cast[nodes.CfgNode]
 
   def reachingDefOut: Iterator[nodes.CfgNode] = node._reachingDefOut.cast[nodes.CfgNode]
@@ -421,6 +439,23 @@ final class AccessNeighborsForMethodTraversal(val traversal: Iterator[nodes.Meth
   /** Traverse to JUMP_TARGET via CONTAINS OUT edge.
     */
   def _jumpTargetViaContainsOut: Iterator[nodes.JumpTarget] = traversal.flatMap(_._jumpTargetViaContainsOut)
+
+  /** Traverse to LIFETIME via AST IN edge.
+    */
+  def _lifetimeViaAstIn: Iterator[nodes.Lifetime] = traversal.flatMap(_._lifetimeViaAstIn)
+
+  /** Traverse to LIFETIME via OUT_LIVE IN edge.
+    */
+  def _lifetimeViaOutLiveIn: Iterator[nodes.Lifetime] = traversal.flatMap(_._lifetimeViaOutLiveIn)
+
+  /** Traverse to LIFETIME_PARAMETER via AST IN edge.
+    */
+  def _lifetimeParameterViaAstIn: Iterator[nodes.LifetimeParameter] = traversal.flatMap(_._lifetimeParameterViaAstIn)
+
+  /** Traverse to LIFETIME_PARAMETER via OUT_LIVE IN edge.
+    */
+  def _lifetimeParameterViaOutLiveIn: Iterator[nodes.LifetimeParameter] =
+    traversal.flatMap(_._lifetimeParameterViaOutLiveIn)
 
   /** Traverse to LITERAL via DOMINATE OUT edge.
     */
@@ -623,6 +658,8 @@ final class AccessNeighborsForMethodTraversal(val traversal: Iterator[nodes.Meth
   def containsOut: Iterator[nodes.CfgNode] = traversal.flatMap(_.containsOut)
 
   def dominateOut: Iterator[nodes.CfgNode] = traversal.flatMap(_.dominateOut)
+
+  def outLiveIn: Iterator[nodes.AstNode] = traversal.flatMap(_.outLiveIn)
 
   def postDominateIn: Iterator[nodes.CfgNode] = traversal.flatMap(_.postDominateIn)
 

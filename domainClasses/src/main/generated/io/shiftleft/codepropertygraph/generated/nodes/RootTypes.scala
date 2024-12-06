@@ -102,40 +102,45 @@ abstract class StoredNode(graph_4762: flatgraph.Graph, kind_4762: Short, seq_476
   final def _isCallForImportIn: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 16).asInstanceOf[Iterator[StoredNode]]
 
-  final def _parameterLinkOut: Iterator[StoredNode] =
+  final def _outLiveOut: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsOut(this.graph, this.nodeKind, this.seq, 17).asInstanceOf[Iterator[StoredNode]]
-  final def _parameterLinkIn: Iterator[StoredNode] =
+  final def _outLiveIn: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 17).asInstanceOf[Iterator[StoredNode]]
 
-  final def _postDominateOut: Iterator[StoredNode] =
+  final def _parameterLinkOut: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsOut(this.graph, this.nodeKind, this.seq, 18).asInstanceOf[Iterator[StoredNode]]
-  final def _postDominateIn: Iterator[StoredNode] =
+  final def _parameterLinkIn: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 18).asInstanceOf[Iterator[StoredNode]]
 
-  final def _reachingDefOut: Iterator[StoredNode] =
+  final def _postDominateOut: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsOut(this.graph, this.nodeKind, this.seq, 19).asInstanceOf[Iterator[StoredNode]]
-  final def _reachingDefIn: Iterator[StoredNode] =
+  final def _postDominateIn: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 19).asInstanceOf[Iterator[StoredNode]]
 
-  final def _receiverOut: Iterator[StoredNode] =
+  final def _reachingDefOut: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsOut(this.graph, this.nodeKind, this.seq, 20).asInstanceOf[Iterator[StoredNode]]
-  final def _receiverIn: Iterator[StoredNode] =
+  final def _reachingDefIn: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 20).asInstanceOf[Iterator[StoredNode]]
 
-  final def _refOut: Iterator[StoredNode] =
+  final def _receiverOut: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsOut(this.graph, this.nodeKind, this.seq, 21).asInstanceOf[Iterator[StoredNode]]
-  final def _refIn: Iterator[StoredNode] =
+  final def _receiverIn: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 21).asInstanceOf[Iterator[StoredNode]]
 
-  final def _sourceFileOut: Iterator[StoredNode] =
+  final def _refOut: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsOut(this.graph, this.nodeKind, this.seq, 22).asInstanceOf[Iterator[StoredNode]]
-  final def _sourceFileIn: Iterator[StoredNode] =
+  final def _refIn: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 22).asInstanceOf[Iterator[StoredNode]]
 
-  final def _taggedByOut: Iterator[StoredNode] =
+  final def _sourceFileOut: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsOut(this.graph, this.nodeKind, this.seq, 23).asInstanceOf[Iterator[StoredNode]]
-  final def _taggedByIn: Iterator[StoredNode] =
+  final def _sourceFileIn: Iterator[StoredNode] =
     flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 23).asInstanceOf[Iterator[StoredNode]]
+
+  final def _taggedByOut: Iterator[StoredNode] =
+    flatgraph.Accessors.getNeighborsOut(this.graph, this.nodeKind, this.seq, 24).asInstanceOf[Iterator[StoredNode]]
+  final def _taggedByIn: Iterator[StoredNode] =
+    flatgraph.Accessors.getNeighborsIn(this.graph, this.nodeKind, this.seq, 24).asInstanceOf[Iterator[StoredNode]]
 
 }
 

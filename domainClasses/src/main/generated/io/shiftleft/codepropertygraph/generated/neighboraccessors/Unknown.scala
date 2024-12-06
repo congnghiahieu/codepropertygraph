@@ -213,6 +213,39 @@ final class AccessNeighborsForUnknown(val node: nodes.Unknown) extends AnyVal {
     */
   def _jumpTargetViaPostDominateOut: Iterator[nodes.JumpTarget] = postDominateOut.collectAll[nodes.JumpTarget]
 
+  /** Traverse to LIFETIME via AST IN edge.
+    */
+  def _lifetimeViaAstIn: Iterator[nodes.Lifetime] = astIn.collectAll[nodes.Lifetime]
+
+  /** Traverse to LIFETIME via AST OUT edge.
+    */
+  def _lifetimeViaAstOut: Iterator[nodes.Lifetime] = astOut.collectAll[nodes.Lifetime]
+
+  /** Traverse to LIFETIME via OUT_LIVE IN edge.
+    */
+  def _lifetimeViaOutLiveIn: Iterator[nodes.Lifetime] = outLiveIn.collectAll[nodes.Lifetime]
+
+  /** Traverse to LIFETIME via OUT_LIVE OUT edge.
+    */
+  def _lifetimeViaOutLiveOut: Iterator[nodes.Lifetime] = outLiveOut.collectAll[nodes.Lifetime]
+
+  /** Traverse to LIFETIME_ARGUMENT via AST OUT edge.
+    */
+  def _lifetimeArgumentViaAstOut: Iterator[nodes.LifetimeArgument] = astOut.collectAll[nodes.LifetimeArgument]
+
+  /** Traverse to LIFETIME_ARGUMENT via OUT_LIVE OUT edge.
+    */
+  def _lifetimeArgumentViaOutLiveOut: Iterator[nodes.LifetimeArgument] = outLiveOut.collectAll[nodes.LifetimeArgument]
+
+  /** Traverse to LIFETIME_PARAMETER via AST OUT edge.
+    */
+  def _lifetimeParameterViaAstOut: Iterator[nodes.LifetimeParameter] = astOut.collectAll[nodes.LifetimeParameter]
+
+  /** Traverse to LIFETIME_PARAMETER via OUT_LIVE OUT edge.
+    */
+  def _lifetimeParameterViaOutLiveOut: Iterator[nodes.LifetimeParameter] =
+    outLiveOut.collectAll[nodes.LifetimeParameter]
+
   /** Traverse to LITERAL via AST OUT edge.
     */
   def _literalViaAstOut: Iterator[nodes.Literal] = astOut.collectAll[nodes.Literal]
@@ -424,7 +457,7 @@ final class AccessNeighborsForUnknown(val node: nodes.Unknown) extends AnyVal {
 
   def argumentIn: Iterator[nodes.Expression] = node._argumentIn.cast[nodes.Expression]
 
-  def astIn: Iterator[nodes.CfgNode] = node._astIn.cast[nodes.CfgNode]
+  def astIn: Iterator[nodes.AstNode] = node._astIn.cast[nodes.AstNode]
 
   def astOut: Iterator[nodes.AstNode] = node._astOut.cast[nodes.AstNode]
 
@@ -443,6 +476,10 @@ final class AccessNeighborsForUnknown(val node: nodes.Unknown) extends AnyVal {
   def dominateOut: Iterator[nodes.CfgNode] = node._dominateOut.cast[nodes.CfgNode]
 
   def evalTypeOut: Iterator[nodes.Type] = node._evalTypeOut.cast[nodes.Type]
+
+  def outLiveIn: Iterator[nodes.Lifetime] = node._outLiveIn.cast[nodes.Lifetime]
+
+  def outLiveOut: Iterator[nodes.AstNode] = node._outLiveOut.cast[nodes.AstNode]
 
   def postDominateIn: Iterator[nodes.CfgNode] = node._postDominateIn.cast[nodes.CfgNode]
 
@@ -670,6 +707,40 @@ final class AccessNeighborsForUnknownTraversal(val traversal: Iterator[nodes.Unk
     */
   def _jumpTargetViaPostDominateOut: Iterator[nodes.JumpTarget] = traversal.flatMap(_._jumpTargetViaPostDominateOut)
 
+  /** Traverse to LIFETIME via AST IN edge.
+    */
+  def _lifetimeViaAstIn: Iterator[nodes.Lifetime] = traversal.flatMap(_._lifetimeViaAstIn)
+
+  /** Traverse to LIFETIME via AST OUT edge.
+    */
+  def _lifetimeViaAstOut: Iterator[nodes.Lifetime] = traversal.flatMap(_._lifetimeViaAstOut)
+
+  /** Traverse to LIFETIME via OUT_LIVE IN edge.
+    */
+  def _lifetimeViaOutLiveIn: Iterator[nodes.Lifetime] = traversal.flatMap(_._lifetimeViaOutLiveIn)
+
+  /** Traverse to LIFETIME via OUT_LIVE OUT edge.
+    */
+  def _lifetimeViaOutLiveOut: Iterator[nodes.Lifetime] = traversal.flatMap(_._lifetimeViaOutLiveOut)
+
+  /** Traverse to LIFETIME_ARGUMENT via AST OUT edge.
+    */
+  def _lifetimeArgumentViaAstOut: Iterator[nodes.LifetimeArgument] = traversal.flatMap(_._lifetimeArgumentViaAstOut)
+
+  /** Traverse to LIFETIME_ARGUMENT via OUT_LIVE OUT edge.
+    */
+  def _lifetimeArgumentViaOutLiveOut: Iterator[nodes.LifetimeArgument] =
+    traversal.flatMap(_._lifetimeArgumentViaOutLiveOut)
+
+  /** Traverse to LIFETIME_PARAMETER via AST OUT edge.
+    */
+  def _lifetimeParameterViaAstOut: Iterator[nodes.LifetimeParameter] = traversal.flatMap(_._lifetimeParameterViaAstOut)
+
+  /** Traverse to LIFETIME_PARAMETER via OUT_LIVE OUT edge.
+    */
+  def _lifetimeParameterViaOutLiveOut: Iterator[nodes.LifetimeParameter] =
+    traversal.flatMap(_._lifetimeParameterViaOutLiveOut)
+
   /** Traverse to LITERAL via AST OUT edge.
     */
   def _literalViaAstOut: Iterator[nodes.Literal] = traversal.flatMap(_._literalViaAstOut)
@@ -881,7 +952,7 @@ final class AccessNeighborsForUnknownTraversal(val traversal: Iterator[nodes.Unk
 
   def argumentIn: Iterator[nodes.Expression] = traversal.flatMap(_.argumentIn)
 
-  def astIn: Iterator[nodes.CfgNode] = traversal.flatMap(_.astIn)
+  def astIn: Iterator[nodes.AstNode] = traversal.flatMap(_.astIn)
 
   def astOut: Iterator[nodes.AstNode] = traversal.flatMap(_.astOut)
 
@@ -900,6 +971,10 @@ final class AccessNeighborsForUnknownTraversal(val traversal: Iterator[nodes.Unk
   def dominateOut: Iterator[nodes.CfgNode] = traversal.flatMap(_.dominateOut)
 
   def evalTypeOut: Iterator[nodes.Type] = traversal.flatMap(_.evalTypeOut)
+
+  def outLiveIn: Iterator[nodes.Lifetime] = traversal.flatMap(_.outLiveIn)
+
+  def outLiveOut: Iterator[nodes.AstNode] = traversal.flatMap(_.outLiveOut)
 
   def postDominateIn: Iterator[nodes.CfgNode] = traversal.flatMap(_.postDominateIn)
 

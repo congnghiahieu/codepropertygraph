@@ -73,6 +73,9 @@ public static final String INHERITS_FROM = "INHERITS_FROM";
 ￼        | */
 public static final String IS_CALL_FOR_IMPORT = "IS_CALL_FOR_IMPORT";
 
+/** Edge used for LIFETIME_PARAMETER, LIFETIME_ARGUMENT, LIFETIME */
+public static final String OUT_LIVE = "OUT_LIVE";
+
 /** This edge connects a method input parameter to the corresponding
 method output parameter. */
 public static final String PARAMETER_LINK = "PARAMETER_LINK";
@@ -122,6 +125,7 @@ add(EVAL_TYPE);
 add(IMPORTS);
 add(INHERITS_FROM);
 add(IS_CALL_FOR_IMPORT);
+add(OUT_LIVE);
 add(PARAMETER_LINK);
 add(POST_DOMINATE);
 add(REACHING_DEF);

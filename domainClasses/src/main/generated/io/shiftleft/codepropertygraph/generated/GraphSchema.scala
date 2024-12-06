@@ -71,6 +71,7 @@ object GraphSchema extends flatgraph.Schema {
     "IMPORTS",
     "INHERITS_FROM",
     "IS_CALL_FOR_IMPORT",
+    "OUT_LIVE",
     "PARAMETER_LINK",
     "POST_DOMINATE",
     "REACHING_DEF",
@@ -100,7 +101,8 @@ object GraphSchema extends flatgraph.Schema {
     size => null,
     size => null,
     size => null,
-    size => Array.fill(size)("<empty>") /* label = REACHING_DEF, id = 19 */,
+    size => null,
+    size => Array.fill(size)("<empty>") /* label = REACHING_DEF, id = 20 */,
     size => null,
     size => null,
     size => null,
@@ -173,6 +175,7 @@ object GraphSchema extends flatgraph.Schema {
     (s, d, subseq, p) => new edges.Imports(s, d, subseq, p),
     (s, d, subseq, p) => new edges.InheritsFrom(s, d, subseq, p),
     (s, d, subseq, p) => new edges.IsCallForImport(s, d, subseq, p),
+    (s, d, subseq, p) => new edges.OutLive(s, d, subseq, p),
     (s, d, subseq, p) => new edges.ParameterLink(s, d, subseq, p),
     (s, d, subseq, p) => new edges.PostDominate(s, d, subseq, p),
     (s, d, subseq, p) => new edges.ReachingDef(s, d, subseq, p),
@@ -562,20 +565,40 @@ object GraphSchema extends flatgraph.Schema {
     nodePropertyDescriptors(3049) = FormalQtyType.QtyOne
     nodePropertyDescriptors(5022) = FormalQtyType.StringType // KEY_VALUE_PAIR.VALUE
     nodePropertyDescriptors(5023) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(982) = FormalQtyType.StringType // LIFETIME.CODE
+    nodePropertyDescriptors(983) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(1076) = FormalQtyType.IntType // LIFETIME.COLUMN_NUMBER
+    nodePropertyDescriptors(1077) = FormalQtyType.QtyOption
     nodePropertyDescriptors(2110) = FormalQtyType.StringType // LIFETIME.FULL_NAME
     nodePropertyDescriptors(2111) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(3238) = FormalQtyType.IntType // LIFETIME.LINE_NUMBER
+    nodePropertyDescriptors(3239) = FormalQtyType.QtyOption
     nodePropertyDescriptors(3708) = FormalQtyType.StringType // LIFETIME.NAME
     nodePropertyDescriptors(3709) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(4084) = FormalQtyType.IntType // LIFETIME.ORDER
+    nodePropertyDescriptors(4085) = FormalQtyType.QtyOne
     nodePropertyDescriptors(4836) = FormalQtyType.StringType // LIFETIME.TYPE_DECL_FULL_NAME
     nodePropertyDescriptors(4837) = FormalQtyType.QtyOne
     nodePropertyDescriptors(984) = FormalQtyType.StringType // LIFETIME_ARGUMENT.CODE
     nodePropertyDescriptors(985) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(1078) = FormalQtyType.IntType // LIFETIME_ARGUMENT.COLUMN_NUMBER
+    nodePropertyDescriptors(1079) = FormalQtyType.QtyOption
+    nodePropertyDescriptors(3240) = FormalQtyType.IntType // LIFETIME_ARGUMENT.LINE_NUMBER
+    nodePropertyDescriptors(3241) = FormalQtyType.QtyOption
     nodePropertyDescriptors(3710) = FormalQtyType.StringType // LIFETIME_ARGUMENT.NAME
     nodePropertyDescriptors(3711) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(4086) = FormalQtyType.IntType // LIFETIME_ARGUMENT.ORDER
+    nodePropertyDescriptors(4087) = FormalQtyType.QtyOne
     nodePropertyDescriptors(986) = FormalQtyType.StringType // LIFETIME_PARAMETER.CODE
     nodePropertyDescriptors(987) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(1080) = FormalQtyType.IntType // LIFETIME_PARAMETER.COLUMN_NUMBER
+    nodePropertyDescriptors(1081) = FormalQtyType.QtyOption
+    nodePropertyDescriptors(3242) = FormalQtyType.IntType // LIFETIME_PARAMETER.LINE_NUMBER
+    nodePropertyDescriptors(3243) = FormalQtyType.QtyOption
     nodePropertyDescriptors(3712) = FormalQtyType.StringType // LIFETIME_PARAMETER.NAME
     nodePropertyDescriptors(3713) = FormalQtyType.QtyOne
+    nodePropertyDescriptors(4088) = FormalQtyType.IntType // LIFETIME_PARAMETER.ORDER
+    nodePropertyDescriptors(4089) = FormalQtyType.QtyOne
     nodePropertyDescriptors(142) = FormalQtyType.IntType // LITERAL.ARGUMENT_INDEX
     nodePropertyDescriptors(143) = FormalQtyType.QtyOne
     nodePropertyDescriptors(236) = FormalQtyType.StringType // LITERAL.ARGUMENT_NAME
@@ -1068,13 +1091,23 @@ object GraphSchema extends flatgraph.Schema {
     _newNodeInserters(4362) = nodes.NewJumpTarget.InsertionHelpers.NewNodeInserter_JumpTarget_parserTypeName
     _newNodeInserters(3048) = nodes.NewKeyValuePair.InsertionHelpers.NewNodeInserter_KeyValuePair_key
     _newNodeInserters(5022) = nodes.NewKeyValuePair.InsertionHelpers.NewNodeInserter_KeyValuePair_value
+    _newNodeInserters(982) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_code
+    _newNodeInserters(1076) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_columnNumber
     _newNodeInserters(2110) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_fullName
+    _newNodeInserters(3238) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_lineNumber
     _newNodeInserters(3708) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_name
+    _newNodeInserters(4084) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_order
     _newNodeInserters(4836) = nodes.NewLifetime.InsertionHelpers.NewNodeInserter_Lifetime_typeDeclFullName
     _newNodeInserters(984) = nodes.NewLifetimeArgument.InsertionHelpers.NewNodeInserter_LifetimeArgument_code
+    _newNodeInserters(1078) = nodes.NewLifetimeArgument.InsertionHelpers.NewNodeInserter_LifetimeArgument_columnNumber
+    _newNodeInserters(3240) = nodes.NewLifetimeArgument.InsertionHelpers.NewNodeInserter_LifetimeArgument_lineNumber
     _newNodeInserters(3710) = nodes.NewLifetimeArgument.InsertionHelpers.NewNodeInserter_LifetimeArgument_name
+    _newNodeInserters(4086) = nodes.NewLifetimeArgument.InsertionHelpers.NewNodeInserter_LifetimeArgument_order
     _newNodeInserters(986) = nodes.NewLifetimeParameter.InsertionHelpers.NewNodeInserter_LifetimeParameter_code
+    _newNodeInserters(1080) = nodes.NewLifetimeParameter.InsertionHelpers.NewNodeInserter_LifetimeParameter_columnNumber
+    _newNodeInserters(3242) = nodes.NewLifetimeParameter.InsertionHelpers.NewNodeInserter_LifetimeParameter_lineNumber
     _newNodeInserters(3712) = nodes.NewLifetimeParameter.InsertionHelpers.NewNodeInserter_LifetimeParameter_name
+    _newNodeInserters(4088) = nodes.NewLifetimeParameter.InsertionHelpers.NewNodeInserter_LifetimeParameter_order
     _newNodeInserters(142) = nodes.NewLiteral.InsertionHelpers.NewNodeInserter_Literal_argumentIndex
     _newNodeInserters(236) = nodes.NewLiteral.InsertionHelpers.NewNodeInserter_Literal_argumentName
     _newNodeInserters(988) = nodes.NewLiteral.InsertionHelpers.NewNodeInserter_Literal_code
@@ -1264,7 +1297,7 @@ object GraphSchema extends flatgraph.Schema {
     _newNodeInserters
   }
   override def getNumberOfNodeKinds: Int              = 47
-  override def getNumberOfEdgeKinds: Int              = 24
+  override def getNumberOfEdgeKinds: Int              = 25
   override def getNodeLabel(nodeKind: Int): String    = nodeLabels(nodeKind)
   override def getNodeKindByLabel(label: String): Int = nodeKindByLabel.getOrElse(label, flatgraph.Schema.UndefinedKind)
   override def getEdgeLabel(nodeKind: Int, edgeKind: Int): String = edgeLabels(edgeKind)
@@ -1355,10 +1388,11 @@ object GraphSchema extends flatgraph.Schema {
       case "JUMP_LABEL" => Set("CODE", "COLUMN_NUMBER", "LINE_NUMBER", "NAME", "ORDER", "PARSER_TYPE_NAME")
       case "JUMP_TARGET" =>
         Set("ARGUMENT_INDEX", "CODE", "COLUMN_NUMBER", "LINE_NUMBER", "NAME", "ORDER", "PARSER_TYPE_NAME")
-      case "KEY_VALUE_PAIR"     => Set("KEY", "VALUE")
-      case "LIFETIME"           => Set("FULL_NAME", "NAME", "TYPE_DECL_FULL_NAME")
-      case "LIFETIME_ARGUMENT"  => Set("CODE", "NAME")
-      case "LIFETIME_PARAMETER" => Set("CODE", "NAME")
+      case "KEY_VALUE_PAIR" => Set("KEY", "VALUE")
+      case "LIFETIME" =>
+        Set("CODE", "COLUMN_NUMBER", "FULL_NAME", "LINE_NUMBER", "NAME", "ORDER", "TYPE_DECL_FULL_NAME")
+      case "LIFETIME_ARGUMENT"  => Set("CODE", "COLUMN_NUMBER", "LINE_NUMBER", "NAME", "ORDER")
+      case "LIFETIME_PARAMETER" => Set("CODE", "COLUMN_NUMBER", "LINE_NUMBER", "NAME", "ORDER")
       case "LITERAL" =>
         Set(
           "ARGUMENT_INDEX",
