@@ -24,7 +24,9 @@ can be augmented via extension schemas to enable storage of
 application-specific data.
 
 # Usage as a dependency
+
 `build.sbt`:
+
 ```
 libraryDependencies += "io.shiftleft" %% "codepropertygraph" % "x.y.z"
 ```
@@ -35,10 +37,10 @@ The build process has been verified on Linux and it should be possible
 to build on OS X and BSD systems as well. The build process requires
 the following prerequisites:
 
-* [Java runtime 11](http://openjdk.java.net/install/)
-* [Scala build tool (SBT)](https://www.scala-sbt.org/)
-* [Git-lfs](https://git-lfs.github.com/)
-* [Protocol Buffer](https://github.com/protocolbuffers/protobuf/releases)
+- [Java runtime 11](http://openjdk.java.net/install/)
+- [Scala build tool (SBT)](https://www.scala-sbt.org/)
+- [Git-lfs](https://git-lfs.github.com/)
+- [Protocol Buffer](https://github.com/protocolbuffers/protobuf/releases)
 
 Some binary files required for testing are managed through `git-lfs`. If you haven't cloned this repository yet, simply run `git lfs install`.
 If you have cloned it already, additionally run `git lfs pull` (from within the repository).
@@ -73,9 +75,11 @@ There are some sample cpgs in this repository in the `resources/testcode/cpgs` d
 You can run `./regenerate-test-cpgs.sh` to update them, but this requires the proprietary java2cpg installed locally.
 
 ### [Tinkergraph (in memory reference db)](http://tinkerpop.apache.org/docs/current/reference/#tinkergraph-gremlin)
+
 ```
 sbt semanticcpg/console
 ```
+
 ```scala
 import io.shiftleft.codepropertygraph.generated.Cpg
 import io.shiftleft.semanticcpg.language._
